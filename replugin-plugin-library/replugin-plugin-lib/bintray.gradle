@@ -6,16 +6,20 @@ def siteUrl = RP_SITE   // 项目的主页
 def gitUrl = RP_GIT_URL // Git仓库的url
 def ARTIFACT_ID = project.name
 
+group = GROUP_ID
+archivesBaseName = ARTIFACT_ID
+version = VERSION
+
 install {
     repositories.mavenInstaller {
         // This generates POM.xml with proper parameters
         pom {
-            artifactId = project.name
+            artifactId = ARTIFACT_ID
 
             project {
                 packaging 'aar'
                 // Add your description here
-                name 'RePlugin - A flexible, stable, easy-to-use Android Plug-in Framework' //项目描述
+                name RP_DESC //项目描述
                 url siteUrl
                 // Set your license
                 licenses {

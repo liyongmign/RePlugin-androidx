@@ -1,9 +1,10 @@
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
+apply from: '../../rp-bintrary.gradle'
 
 def siteUrl = RP_SITE   // 项目的主页
 def gitUrl = RP_GIT_URL // Git仓库的url
-def artifact_Id = project.name
+def ARTIFACT_ID = project.name
 
 install {
     repositories.mavenInstaller {
@@ -12,7 +13,6 @@ install {
             artifactId = project.name
 
             project {
-
                 packaging 'aar'
                 // Add your description here
                 name 'RePlugin - A flexible, stable, easy-to-use Android Plug-in Framework' //项目描述
@@ -20,13 +20,13 @@ install {
                 // Set your license
                 licenses {
                     license {
-                        name 'Apache License 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0'
+                        name RP_LICENSES_NAME
+                        url RP_LICENSES_URL
                     }
                 }
                 developers {
                     developer {
-                        id 'none'    //填写的一些基本信息
+                        id RP_USER    //填写的一些基本信息
                         name RP_USER
                         email RP_USERORG
                     }
@@ -65,10 +65,10 @@ bintray {
     key = ""
     configurations = ['archives']
     pkg {
-        repo = '' // 上传到中央仓库的名称
-        name = '' // 上传到jcenter 的项目名称
+        repo = RP_REPO // 上传到中央仓库的名称
+        name = "${RP_GROUP}:${ARTIFACT_ID}" // 上传到jcenter 的项目名称
         userOrg = ''
-        desc = 'RePlugin - A flexible, stable, easy-to-use Android Plug-in Framework' // 项目描述
+        desc = RP_DESC // 项目描述
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]

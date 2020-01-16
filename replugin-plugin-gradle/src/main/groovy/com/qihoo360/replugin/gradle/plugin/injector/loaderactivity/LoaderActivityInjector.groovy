@@ -81,7 +81,7 @@ public class LoaderActivityInjector extends BaseInjector {
         def stream, ctCls
         try {
             stream = new FileInputStream(clsFilePath)
-            ctCls = pool.makeClass(stream);
+            ctCls = pool.makeClass(stream)
 /*
              // 打印当前 Activity 的所有父类
             CtClass tmpSuper = ctCls.superclass

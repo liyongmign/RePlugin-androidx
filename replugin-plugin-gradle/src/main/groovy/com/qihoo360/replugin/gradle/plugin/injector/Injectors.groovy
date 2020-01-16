@@ -41,7 +41,7 @@ public enum Injectors {
     Injectors(String nickName, IClassInjector injector, String desc) {
         this.injector = injector
         this.nickName = nickName
-        this.desc = desc;
+        this.desc = desc
     }
 }
 

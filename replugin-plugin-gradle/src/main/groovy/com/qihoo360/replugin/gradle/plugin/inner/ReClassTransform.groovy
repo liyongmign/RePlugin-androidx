@@ -23,18 +23,20 @@ import com.android.build.gradle.BasePlugin
 import com.android.build.gradle.internal.pipeline.TransformManager
 import com.qihoo360.replugin.gradle.plugin.injector.IClassInjector
 import com.qihoo360.replugin.gradle.plugin.injector.Injectors
+import com.qihoo360.replugin.gradle.plugin.util.Logger
 import javassist.ClassPool
 import org.apache.commons.codec.digest.DigestUtils
 import org.apache.commons.io.FileUtils
 import org.gradle.api.GradleException
 import org.gradle.api.Project
+
 import java.util.regex.Pattern
 
 /**
  * @author RePlugin Team
  */
 public class ReClassTransform extends Transform {
-
+    private static final String TAG = "ReClassTransform"
     private Project project
     private def globalScope
 
@@ -68,11 +70,10 @@ public class ReClassTransform extends Transform {
         /* 读取用户配置 */
         def config = project.extensions.getByName('repluginPluginConfig')
 
-
         File rootLocation = null
         try {
             rootLocation = outputProvider.rootLocation
-        } catch (Throwable e) {
+        } catch (Throwable ignored) {
             //android gradle plugin 3.0.0+ 修改了私有变量，将其移动到了IntermediateFolderUtils中去
             rootLocation = outputProvider.folderUtils.getRootFolder()
         }
@@ -127,12 +128,12 @@ public class ReClassTransform extends Transform {
         Util.newSection()
         Injectors.values().each {
             if (it.nickName in injectors) {
-                println ">>> Do: ${it.nickName}"
+                Logger.i(TAG, ">>> Do: ${it.nickName}")
                 // 将 NickName 的第 0 个字符转换成小写，用作对应配置的名称
                 def configPre = Util.lowerCaseAtIndex(it.nickName, 0)
                 doInject(inputs, pool, it.injector, config.properties["${configPre}Config"])
             } else {
-                println ">>> Skip: ${it.nickName}"
+                Logger.i(TAG, ">>> Skip: ${it.nickName}")
             }
         }
 
@@ -177,7 +178,7 @@ public class ReClassTransform extends Transform {
             String JarAfterzip = map.get(jar.getParent() + File.separatorChar + jar.getName())
             String dirAfterUnzip = JarAfterzip.replace('.jar', '')
             // println ">>> 压缩目录 $dirAfterUnzip"
-            
+
             Util.zipDir(dirAfterUnzip, JarAfterzip)
 
             // println ">>> 删除目录 $dirAfterUnzip"
@@ -199,8 +200,10 @@ public class ReClassTransform extends Transform {
                     handleJar(pool, it, injector, config)
                 }
             }
-        } catch (Throwable t) {
-            println t.toString()
+        } catch (Exception e) {
+            e.printStackTrace()
+            throw e
+            //Logger.e(TAG, "[$injector] ${e.toString()}")
         }
     }
 
@@ -210,9 +213,9 @@ public class ReClassTransform extends Transform {
     def initClassPool(Collection<TransformInput> inputs) {
         Util.newSection()
         def pool = new ClassPool(true)
-        // 添加编译时需要引用的到类到 ClassPool, 同时记录要修改的 jar 到 includeJars
+        // 添加编译时需要引用的类到 ClassPool, 同时记录要修改的 jar 到 includeJars
         Util.getClassPaths(project, globalScope, inputs, includeJars, map).each {
-            println "    $it"
+            Logger.i(TAG, "$it")
             pool.insertClassPath(it)
         }
         pool
@@ -235,12 +238,12 @@ public class ReClassTransform extends Transform {
      */
     def copyJar(TransformOutputProvider output, JarInput input) {
         File jar = input.file
-        String jarPath = map.get(jar.absolutePath);
+        String jarPath = map.get(jar.absolutePath)
         if (jarPath != null) {
             jar = new File(jarPath)
         }
 
-        if(!jar.exists()){
+        if (!jar.exists()) {
             return
         }
 
@@ -264,7 +267,7 @@ public class ReClassTransform extends Transform {
      * 处理目录中的 class 文件
      */
     def handleDir(ClassPool pool, DirectoryInput input, IClassInjector injector, Object config) {
-        println ">>> Handle Dir: ${input.file.absolutePath}"
+        Logger.i(TAG, "[$injector] >>> Handle Dir: ${input.file.absolutePath}")
         injector.injectClass(pool, input.file.absolutePath, config)
     }
 

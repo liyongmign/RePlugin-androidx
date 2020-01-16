@@ -30,6 +30,7 @@ import org.gradle.api.Project
  * @author RePlugin Team
  */
 public class ReClassPlugin implements Plugin<Project> {
+    private static final String TAG = "ReClassPlugin"
 
     @Override
     public void apply(Project project) {

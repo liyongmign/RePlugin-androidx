@@ -1,0 +1,39 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext.kotlin_version = '1.3.50'
+
+    repositories {
+        google()
+        jcenter()
+        maven { url LOCAL_MAVEN }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.5.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+        classpath 'androidx.qihoo360.replugin:replugin-host-gradle:2.3.3'
+    }
+}
+
+ext {
+    COMPILE_SDK_VERSION = 29
+    BUILD_TOOLS_VERSION = '29.0.2'
+    MIN_SDK_VERSION = 15
+    TARGET_SDK_VERSION = COMPILE_SDK_VERSION
+    VERSION_CODE = 1
+    VERSION_NAME = "1.0"
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url LOCAL_MAVEN }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

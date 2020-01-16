@@ -1,0 +1,47 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.pluginapp">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".apitest.ToastActivity"
+            android:label="@string/activity_toast" />
+        <activity
+            android:name=".apitest.InjectFragmentActivity"
+            android:label="@string/activity_inject_fragment" />
+        <activity
+            android:name=".apitest.ExecutorActivity"
+            android:label="@string/activity_executor" />
+        <activity
+            android:name=".apitest.HandlerActivity"
+            android:label="@string/activity_handler" />
+        <activity
+            android:name=".apitest.ServiceActivity"
+            android:label="@string/activity_service" />
+        <activity
+            android:name=".apitest.BroadcastActivity"
+            android:label="@string/activity_broadcast" />
+        <activity
+            android:name=".apitest.NotificationActivity"
+            android:label="@string/activity_notification" />
+
+        <service android:name=".apitest.TestService" />
+    </application>
+</manifest>

@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">PluginApp</string>
+    <string name="activity_toast">Test Toast</string>
+    <string name="activity_inject_fragment">Test inject Fragment and request permissions</string>
+    <string name="activity_executor">Test Executor</string>
+    <string name="activity_handler">Test Handler</string>
+    <string name="activity_service">Test Service</string>
+    <string name="activity_broadcast">Test BroadcastReceiver</string>
+    <string name="activity_notification">Test Notification</string>
+</resources>

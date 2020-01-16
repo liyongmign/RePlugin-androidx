@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">RePlugin</string>
+
+    <string name="copy_to_sdcard">copy_to_sdcard</string>
+    <string name="delete_from_sdcard">delete_from_sdcard</string>
+    <string name="install_apk">install_apk</string>
+    <string name="uninstall_apk">reinstall_apk</string>
+    <string name="open_apk">open_apk</string>
+</resources>

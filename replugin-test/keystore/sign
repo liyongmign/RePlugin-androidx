@@ -1,0 +1,37 @@
+输入密钥库口令:
+
+密钥库类型: JKS
+密钥库提供方: SUN
+
+您的密钥库包含 1 个条目
+
+别名: test
+创建日期: 2017-5-8
+条目类型: PrivateKeyEntry
+证书链长度: 1
+证书[1]:
+所有者: CN=ryg, OU=app, O=didi, L=beijing, ST=beijing, C=zh_cn
+发布者: CN=ryg, OU=app, O=didi, L=beijing, ST=beijing, C=zh_cn
+序列号: 59665d85
+有效期开始日期: Mon May 08 17:19:34 CST 2017, 截止日期: Fri Sep 23 17:19:34 CST 2044
+证书指纹:
+         MD5: DF:DF:44:9F:1D:99:73:E8:2A:6E:5A:7F:3A:5F:C5:7B
+         SHA1: 6F:63:FC:1D:2A:45:95:4C:12:91:B8:70:83:11:E4:31:F6:54:58:E9
+         SHA256: F8:39:85:21:F8:9D:DF:DC:70:BD:37:7E:48:EE:78:D3:ED:C8:8C:D3:DB:65:EF:9D:13:0F:4E:6B:CB:6F:FC:67
+         签名算法名称: SHA256withRSA
+         版本: 3
+
+扩展:
+
+#1: ObjectId: 2.5.29.14 Criticality=false
+SubjectKeyIdentifier [
+KeyIdentifier [
+0000: 36 C8 D6 8B 56 E3 27 8C   42 90 88 C4 B3 FB F1 63  6...V.'.B......c
+0010: 6E 33 D8 1D                                        n3..
+]
+]
+
+
+
+*******************************************
+*******************************************

@@ -1,1 +1,2 @@
+include ':replugin-host-gradle'
 include ':replugin-plugin-gradle'

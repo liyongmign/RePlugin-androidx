@@ -390,7 +390,7 @@ public class PluginLocalBroadcastManager {
 
         public static void initLocked(final ClassLoader classLoader) {
             // 填充LocalBroadcastManager各方法
-            final String localBroadcastManager = "android.support.v4.content.LocalBroadcastManager";
+            final String localBroadcastManager = "androidx.localbroadcastmanager.content.LocalBroadcastManager";
             getInstance = new MethodInvoker(classLoader, localBroadcastManager, "getInstance", new Class<?>[]{Context.class});
             registerReceiver = new MethodInvoker(classLoader, localBroadcastManager, "registerReceiver", new Class<?>[]{BroadcastReceiver.class, IntentFilter.class});
             unregisterReceiver = new MethodInvoker(classLoader, localBroadcastManager, "unregisterReceiver", new Class<?>[]{BroadcastReceiver.class});

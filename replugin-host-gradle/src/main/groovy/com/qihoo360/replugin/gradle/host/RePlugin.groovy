@@ -262,7 +262,7 @@ class RepluginConfig {
 
     /**
      * 是否使用 AppCompat 库
-     * com.android.support:appcompat-v7:25.2.0
+     * androidx.appcompat:appcompat:1.1.0
      */
     def useAppCompat = false
 

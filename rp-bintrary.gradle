@@ -1,15 +1,122 @@
 ext {
     RP_USER = 'none'
-    RP_USERORG = 'none' // unset this if you an't belong to any orgnization
+    RP_EMAIL = 'none'
+    //
     RP_REPO = 'none'
+    RP_USERORG = 'none' // unset this if you an't belong to any orgnization
     //
     RP_SITE = 'none'
     RP_GIT_URL = 'none'
     RP_DESC = 'RePlugin - A flexible, stable, easy-to-use Android Plug-in Framework'
-    RP_EMAIL = 'none'
     RP_LICENSES_URL = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
     RP_LICENSES_NAME = 'Apache-2.0'
     //
     RP_GROUP = 'com.qihoo360.replugin'
     RP_VERSION = '2.3.3'
+}
+
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+def siteUrl = RP_SITE   // 项目的主页
+def gitUrl = RP_GIT_URL // Git仓库的url
+def ARTIFACT_ID = project.name
+
+group = RP_GROUP
+archivesBaseName = ARTIFACT_ID
+version = RP_VERSION
+
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom {
+            artifactId = ARTIFACT_ID
+
+            project {
+                packaging 'aar'
+                // Add your description here
+                name RP_DESC //项目描述
+                url siteUrl
+                // Set your license
+                licenses {
+                    license {
+                        name RP_LICENSES_NAME
+                        url RP_LICENSES_URL
+                    }
+                }
+                developers {
+                    developer {
+                        id RP_USER    //填写的一些基本信息
+                        name RP_USER
+                        email RP_EMAIL
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
+        }
+    }
+}
+
+if (project.hasProperty("android")) { // Android libraries
+    task sourcesJar(type: Jar) {
+        getArchiveClassifier().set('sources')
+        from android.sourceSets.main.java.srcDirs
+
+        exclude '**/BuildConfig.class'
+        exclude '**/R.class'
+    }
+
+    task javadoc(type: Javadoc) {
+        options.encoding "utf-8"
+        options.charSet 'utf-8'
+        source = android.sourceSets.main.java.srcDirs
+        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+        failOnError false
+
+        exclude '**/BuildConfig.class'
+        exclude '**/R.class'
+    }
+} else { // Java libraries
+    task sourcesJar(type: Jar, dependsOn: classes) {
+        getArchiveClassifier().set('sources')
+        from sourceSets.main.allSource
+
+        exclude '**/BuildConfig.class'
+        exclude '**/R.class'
+    }
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    getArchiveClassifier().set('javadoc')
+    from javadoc.destinationDir
+
+    exclude '**/BuildConfig.class'
+    exclude '**/R.class'
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+    configurations = ['archives']
+    pkg {
+        repo = RP_REPO // 上传到中央仓库的名称
+        name = "${RP_GROUP}:${ARTIFACT_ID}" // 上传到jcenter 的项目名称
+        userOrg = RP_USERORG
+        desc = RP_DESC // 项目描述
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = ["Apache-2.0"]
+        publish = true
+    }
 }

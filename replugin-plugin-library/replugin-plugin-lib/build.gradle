@@ -47,4 +47,4 @@ dependencies {
 }
 
 // bintray
-apply from: 'bintray.gradle'
+apply from: '../../rp-bintrary.gradle'

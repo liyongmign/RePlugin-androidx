@@ -22,48 +22,48 @@ package com.qihoo360.replugin.gradle.plugin
  */
 class AppConstant {
 
-    /** °æ±¾ºÅ */
+    /** ç‰ˆæœ¬å· */
     def static final VER = "2.3.3-test"
 
-    /** ´òÓ¡ĞÅÏ¢Ê±ºòµÄÇ°×º */
+    /** æ‰“å°ä¿¡æ¯æ—¶å€™çš„å‰ç¼€ */
     def static final TAG = "< replugin-plugin-v${VER} >"
 
-    /** Íâ²¿ÓÃ»§ÅäÖÃĞÅÏ¢ */
+    /** å¤–éƒ¨ç”¨æˆ·é…ç½®ä¿¡æ¯ */
     def static final USER_CONFIG = "repluginPluginConfig"
 
-    /** ÓÃ»§Task×é */
+    /** ç”¨æˆ·Taskç»„ */
     def static final TASKS_GROUP = "replugin-plugin"
 
-    /** TaskÇ°×º */
+    /** Taskå‰ç¼€ */
     def static final TASKS_PREFIX = "rp"
 
 
-    /** ÓÃ»§Task:Ç¿ÖÆÍ£Ö¹ËŞÖ÷app */
+    /** ç”¨æˆ·Task:å¼ºåˆ¶åœæ­¢å®¿ä¸»app */
     def static final TASK_FORCE_STOP_HOST_APP = TASKS_PREFIX + "ForceStopHostApp"
 
-    /** ÓÃ»§Task:Æô¶¯ËŞÖ÷app */
+    /** ç”¨æˆ·Task:å¯åŠ¨å®¿ä¸»app */
     def static final TASK_START_HOST_APP = TASKS_PREFIX + "StartHostApp"
 
-    /** ÓÃ»§Task:ÖØÆôËŞÖ÷app */
+    /** ç”¨æˆ·Task:é‡å¯å®¿ä¸»app */
     def static final TASK_RESTART_HOST_APP = TASKS_PREFIX + "RestartHostApp"
 
 
-    /** ÓÃ»§Task:°²×°²å¼ş */
+    /** ç”¨æˆ·Task:å®‰è£…æ’ä»¶ */
     def static final TASK_INSTALL_PLUGIN = TASKS_PREFIX + "InstallPlugin"
 
-    /** ÓÃ»§Task:°²×°²å¼ş */
+    /** ç”¨æˆ·Task:å®‰è£…æ’ä»¶ */
     def static final TASK_UNINSTALL_PLUGIN = TASKS_PREFIX + "UninstallPlugin"
 
-    /** ÓÃ»§Task:ÔËĞĞ²å¼ş */
+    /** ç”¨æˆ·Task:è¿è¡Œæ’ä»¶ */
     def static final TASK_RUN_PLUGIN = TASKS_PREFIX + "RunPlugin"
 
-    /** ÓÃ»§Task:°²×°²¢ÔËĞĞ²å¼ş */
+    /** ç”¨æˆ·Task:å®‰è£…å¹¶è¿è¡Œæ’ä»¶ */
     def static final TASK_INSTALL_AND_RUN_PLUGIN = TASKS_PREFIX + "InstallAndRunPlugin"
 
 
-    /** ÅäÖÃÀı×Ó */
+    /** é…ç½®ä¾‹å­ */
     static final String CONFIG_EXAMPLE = '''
-// Õâ¸öpluginĞèÒª·ÅÔÚandroidÅäÖÃÖ®ºó£¬ÒòÎªĞèÒª¶ÁÈ¡androidÖĞµÄÅäÖÃÏî
+// è¿™ä¸ªpluginéœ€è¦æ”¾åœ¨androidé…ç½®ä¹‹åï¼Œå› ä¸ºéœ€è¦è¯»å–androidä¸­çš„é…ç½®é¡¹
 apply plugin: 'replugin-plugin-gradle\'
 repluginPluginConfig {
     pluginName = "demo3"

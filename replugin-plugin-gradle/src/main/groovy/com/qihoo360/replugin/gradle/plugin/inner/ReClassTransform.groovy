@@ -202,8 +202,7 @@ public class ReClassTransform extends Transform {
             }
         } catch (Exception e) {
             e.printStackTrace()
-            throw e//todo
-            //Logger.e(TAG, "[$injector] ${e.toString()}")
+            throw e
         }
     }
 

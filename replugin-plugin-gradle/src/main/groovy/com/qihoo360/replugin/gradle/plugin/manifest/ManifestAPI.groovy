@@ -27,7 +27,7 @@ import java.util.regex.Pattern
  * @author RePlugin Team
  */
 public class ManifestAPI {
-
+    private static final def TAG = "ManifestAPI"
     def IManifest sManifestAPIImpl
 
     def getActivities(Project project, String variantDir) {
@@ -59,15 +59,25 @@ public class ManifestAPI {
             File result = null
             //正常的manifest
             File manifestOutputFile = null
-            //instant run的manifest
+            //instant run的manifest，后期不支持该方式
             File instantRunManifestOutputFile = null
             try {
                 manifestOutputFile = processManifestTask.getManifestOutputFile()
                 instantRunManifestOutputFile = processManifestTask.getInstantRunManifestOutputFile()
             } catch (Exception ignored) {
-                Logger.e("Test","${processManifestTask.getManifestOutputDirectory()}")
-                manifestOutputFile = new File(processManifestTask.getManifestOutputDirectory(), "AndroidManifest.xml")
-                instantRunManifestOutputFile = new File(processManifestTask.getInstantRunManifestOutputDirectory(), "AndroidManifest.xml")
+                def p = processManifestTask.getManifestOutputDirectory()
+                def dir = null
+                if (p.class == File.class) {
+                    dir = p
+                } else {
+                    dir = p.getAsFile().get()
+                }
+                manifestOutputFile = new File(dir, "AndroidManifest.xml")
+                try {
+                    instantRunManifestOutputFile = new File(processManifestTask.getInstantRunManifestOutputDirectory(), "AndroidManifest.xml")
+                } catch (Exception e) {
+                    Logger.i(TAG, "Instant run not support: ${e.message}")
+                }
             }
 
             if (manifestOutputFile == null && instantRunManifestOutputFile == null) {
@@ -75,8 +85,10 @@ public class ManifestAPI {
             }
 
             //打印
-            println " manifestOutputFile:${manifestOutputFile} ${manifestOutputFile.exists()}"
-            println " instantRunManifestOutputFile:${instantRunManifestOutputFile} ${instantRunManifestOutputFile.exists()}"
+            Logger.i(TAG, "manifestOutputFile:${manifestOutputFile} ${manifestOutputFile.exists()}")
+            if (instantRunManifestOutputFile != null) {
+                Logger.i(TAG, "instantRunManifestOutputFile:${instantRunManifestOutputFile} ${instantRunManifestOutputFile.exists()}")
+            }
 
             //先设置为正常的manifest
             result = manifestOutputFile
@@ -85,8 +97,8 @@ public class ManifestAPI {
                 //获取instant run 的Task
                 def instantRunTask = project.tasks.getByName("transformClassesWithInstantRunFor${variantName}")
                 //查找instant run是否存在且文件存在
-                if (instantRunTask && instantRunManifestOutputFile.exists()) {
-                    println ' Instant run is enabled and the manifest is exist.'
+                if (instantRunTask && instantRunManifestOutputFile != null && instantRunManifestOutputFile.exists()) {
+                    Logger.i(TAG, 'Instant run is enabled and the manifest is exist.')
                     if (!manifestOutputFile.exists()) {
                         //因为这里只是为了读取activity，所以无论用哪个manifest差别不大
                         //正常情况下不建议用instant run的manifest，除非正常的manifest不存在

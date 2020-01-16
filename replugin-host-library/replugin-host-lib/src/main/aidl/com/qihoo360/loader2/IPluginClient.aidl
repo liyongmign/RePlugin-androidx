@@ -7,10 +7,10 @@ import com.qihoo360.replugin.component.service.server.IPluginServiceServer;
  */
 interface IPluginClient {
 
-    // 参数 plugin, process 可能有冗余，目前临时使用，后续可能优化
+    // Plugin, process may be redundant, used temporarily, and may be optimized later
     String allocActivityContainer(String plugin, int process, String target, in Intent intent);
 
-    // 参数 plugin 用来处理多插件单进程情况
+    // The parameter plugin is used to handle multi-plug-in single-process situations
     IBinder queryBinder(String plugin, String binder);
 
     void releaseBinder();
@@ -24,21 +24,21 @@ interface IPluginClient {
     IPluginServiceServer fetchServiceServer();
 
     /**
-     * 插件收到广播
+     * Plug-in receives broadcast
      *
-     * @param plugin   插件名称
-     * @param receiver Receiver 名称
-     * @param Intent   广播的 Intent 数据
+     * @param plugin The plug-in name
+     * @param receiver Receiver name
+     * @param Intent broadcast's Intent data
      */
     void onReceive(String plugin, String receiver, in Intent intent);
 
     /**
-     * dump通过插件化框架启动起来的Service信息
+     * Dump is the Service information that is started by the plug-in framework.
      */
     String dumpServices();
 
     /**
-     * dump插件化框架中存储的详细Activity坑位映射表
+     * The detailed Activity pit map stored in the dump plug-in framework
      */
     String dumpActivities();
 }

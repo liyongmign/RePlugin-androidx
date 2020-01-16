@@ -1,9 +1,9 @@
 package com.qihoo360.replugin;
 
 /**
- * Binder的获取器，可用于延迟加载IBinder的情况。
+ * Binder acquirers that can be used in cases where IBinder is loaded lazily.
  * <p>
- * 目前用于：
+ * Currently used for:
  * <p>
  * * RePlugin.registerGlobalBinderDelayed
  *
@@ -12,7 +12,7 @@ package com.qihoo360.replugin;
 interface IBinderGetter {
 
     /**
-     * 获取IBinder对象
+     * Get the IBinder object
      */
     IBinder get();
 }

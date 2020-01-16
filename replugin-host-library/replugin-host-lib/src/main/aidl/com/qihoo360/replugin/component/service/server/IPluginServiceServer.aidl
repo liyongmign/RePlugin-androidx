@@ -6,9 +6,9 @@ import android.os.Messenger;
 import com.qihoo360.loader2.mgr.IServiceConnection;
 
 /**
- * 负责Server端的服务调度、提供等工作，是服务的提供方，核心类之一
+ * Responsible for the Server side of service scheduling, provision, is the service provider, one of the core classes.
  *
- * @hide 框架内部使用
+ * @hide Internal use of framework.
  * @author RePlugin Team
  */
 interface IPluginServiceServer {

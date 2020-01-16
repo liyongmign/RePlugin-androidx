@@ -4,93 +4,93 @@ import com.qihoo360.replugin.model.PluginInfo;
 import com.qihoo360.replugin.packages.PluginRunningList;
 
 /**
- * 插件管理器。用来控制插件的安装、卸载、获取等。运行在常驻进程中
+ * Plug-in manager.Used to control the installation, uninstallation, acquisition, and so on of plug-ins.Runs in a resident process.
  * <p>
- * 补充：涉及到插件交互、运行机制有关的管理器，在IPluginHost中
+ * Supplement: managers related to plug-in interaction and runtime mechanism are in IPluginHost.
  *
  * @author RePlugin Team
  */
 interface IPluginManagerServer {
 
     /**
-     * 安装一个插件
+     * Install a plug-in
      * <p>
-     * 注意：若为旧插件（p-n开头），则应使用IPluginHost的pluginDownloaded方法
+     * Note: if the old plugin (p - n) in the beginning, you should use IPluginHost pluginDownloaded method.
      *
-     * @return 安装的插件的PluginInfo对象
+     * @return PluginInfo object for the installed plug-in
      */
     PluginInfo install(String path);
 
     /**
-     * 卸载一个插件
+     * Uninstall a plug-in
      * <p>
-     * 注意：只针对“纯APK”插件方案
+     * Note: only for "pure APK" plug-in scenarios.
      *
-     * @param info 插件信息
-     * @return 是否成功卸载插件？
+     * @param info Plugin information.
+     * @return Did you successfully uninstall the plug-in?
      */
     boolean uninstall(in PluginInfo info);
 
     /**
-     * 加载插件列表，方便之后使用
+     * Load the list of plug-ins for later use
      * <p>
-     * TODO 这里只返回"新版插件"，供PmBase使用。将来会合并
+     * TODO only returns the "new plugin" for use by PmBase.Will merge in the future
      *
-     * @return PluginInfo的列表
+     * @return The list of PluginInfo
      */
     List<PluginInfo> load();
 
     /**
-     * 更新所有插件列表
+     * Update the list of all plug-ins
      *
-     * @return PluginInfo的列表
+     * @return The list of PluginInfo
      */
     List<PluginInfo> updateAll();
 
     /**
-     * 设置isUsed状态，并通知所有进程更新
+     * Set the isUsed state and notify all processes of updates.
      *
-     * @param pluginName 插件名
-     * @param used 是否已经使用
+     * @param pluginName The plugin name
+     * @param used Has it been used?
      */
     void updateUsed(String pluginName, boolean used);
 
     /**
-     * 获取正在运行的插件列表
+     * Gets a list of running plug-ins
      *
-     * @return 正在运行的插件名列表
+     * @return List of running plug-ins
      */
     PluginRunningList getRunningPlugins();
 
     /**
-     * 插件是否正在运行？
+     * Is the plug-in running?
      *
-     * @param pluginName 插件名
-     * @param process 指定进程名，如为Null则表示查所有
-     * @return 是否在运行？
+     * @param pluginName The plugin name
+     * @param process Specifies the name of the process. Null means check all.
+     * @return Has it been used?
      */
     boolean isPluginRunning(String pluginName, String process);
 
     /**
-     * 当进程启动时，同步正在运行的插件状态到Server端
+     * When the process starts, synchronize the running plug-in state to the Server side
      *
-     * @param list         正在运行的插件名列表
+     * @param list List of running plug-ins
      */
     void syncRunningPlugins(in PluginRunningList list);
 
     /**
-     * 当进程启动时，同步正在运行的插件状态到Server端
+     * When the process starts, synchronize the running plug-in state to the Server side
      *
-     * @param processName  进程名
-     * @param pluginName   正在运行的插件名
+     * @param processName The process of
+     * @param pluginName The name of the running plug-in
      */
     void addToRunningPlugins(String processName, int pid, String pluginName);
 
     /**
-     * 获取正在运行此插件的进程名列表
+     * Gets a list of process names that are running the plug-in
      *
-     * @param pluginName 要查询的插件名
-     * @return 正在运行此插件的进程名列表。一定不会为Null
+     * @param pluginName The plug-in name to query for
+     * @return List of process names that are running this plug-in.It must not be Null.
      */
     String[] getRunningProcessesByPlugin(String pluginName);
 }

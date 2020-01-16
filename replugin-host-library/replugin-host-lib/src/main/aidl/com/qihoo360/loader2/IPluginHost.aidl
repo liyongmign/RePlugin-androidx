@@ -41,18 +41,18 @@ interface IPluginHost {
     void unregPluginBinder(in PluginBinderInfo info, IBinder binder);
 
     /**
-    * 注册某插件下所有静态声明的的 receiver 到常驻进程
+    * Register all statically declared receivers under a plug-in to the resident process.
     */
     void regReceiver(String plugin, in Map receiverFilterMap);
 
     void unregReceiver();
 
     /**
-     * 插件收到广播
+     * Plug-in receives broadcast
      *
-     * @param plugin 插件名称
-     * @param receiver Receiver 名称
-     * @param Intent 广播的 Intent 数据
+     * @param plugin The plug-in name
+     * @param receiver Receiver name
+     * @param Intent Broadcast's Intent data
      */
     void onReceive(String plugin, String receiver, in Intent intent);
 
@@ -79,41 +79,41 @@ interface IPluginHost {
     IBinder queryPluginBinder(String plugin, String binder);
 
     /**
-     * 根据 Inent 查询所有插件中的与之匹配的 Receivers
+     * Query for the match Receivers in all plug-ins based on Inent.
      */
     List queryPluginsReceiverList(in Intent intent);
 
     /**
-     * 获取“全新Service管理方案”在Server端的服务
+     * Get the "new Service management solution" Service on the Server side.
      * Added by Jiongxuan Zhang
      */
     IPluginServiceServer fetchServiceServer();
 
     /**
-     * 获取 IPluginManagerServer（纯APK方案使用）的插件服务
+     * Get the plug-in service for the IPluginManagerServer (used for the pure APK scheme)
      * Added by Jiongxuan Zhang
      */
     IPluginManagerServer fetchManagerServer();
 
     /**
-     * 根据 taskAffinity，判断应该取第几组 TaskAffinity
-     * 由于 taskAffinity 是跨进程的属性，所以这里要将 taskAffinityGroup 的数据保存在常驻进程中
-     * Added by hujunjie
+     * According to taskAffinity, which group of taskAffinity should be selected to judge.
+     *
+     * Since taskAffinity is a cross-process property, we want to keep the taskAffinityGroup data in the resident process.
      */
     int getTaskAffinityGroupIndex(String taskAffinity);
 
     /**
-     * 通过进程名来获取PID
+     * Get the PID by the process name.
      */
     int getPidByProcessName(String processName);
 
     /**
-     * 通过PID来获取进程名
+     * Get the process name by PID.
      */
     String getProcessNameByPid(int pid);
 
     /**
-     * dump详细的运行时信息
+     * Dump detailed runtime information.
      */
     String dump();
 }

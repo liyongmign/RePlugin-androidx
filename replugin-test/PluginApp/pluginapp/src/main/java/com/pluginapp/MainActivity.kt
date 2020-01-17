@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         activity_service.setOnClickListener { startActivity(ServiceActivity::class.java) }
         activity_broadcast.setOnClickListener { startActivity(BroadcastActivity::class.java) }
         activity_notification.setOnClickListener { startActivity(NotificationActivity::class.java) }
+        activity_so_files.setOnClickListener { startActivity(SoFilesActivity::class.java) }
     }
 
     private fun startActivity(activityClass: Class<out Activity>) {

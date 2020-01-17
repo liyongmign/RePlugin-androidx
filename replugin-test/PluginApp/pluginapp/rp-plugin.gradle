@@ -1,0 +1,14 @@
+// 这个plugin需要放在android配置之后，因为需要读取android中的配置项
+apply plugin: 'replugin-plugin-gradle'
+
+repluginPluginConfig {
+    appModule = ':pluginapp'
+    pluginName = "pluginapp"
+    phoneStorageDir = "/storage/emulated/0/Android/data/com.test.replugin/files/"
+    hostApplicationId = "com.test.replugin"
+    hostAppLauncherActivity = "com.test.replugin.MainActivity"
+}
+
+dependencies {
+    implementation 'androidx.qihoo360.replugin:replugin-plugin-lib:2.3.3'
+}

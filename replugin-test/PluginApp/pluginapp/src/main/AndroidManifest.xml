@@ -41,6 +41,9 @@
         <activity
             android:name=".apitest.NotificationActivity"
             android:label="@string/activity_notification" />
+        <activity
+            android:name=".apitest.SoFilesActivity"
+            android:label="@string/activity_so_files" />
 
         <service android:name=".apitest.TestService" />
     </application>

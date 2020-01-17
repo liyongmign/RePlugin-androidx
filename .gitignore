@@ -231,3 +231,9 @@ Temporary Items
 # --------
 # Project-level settings
 /.tgitconfig
+
+replugin-host-library/gradle.properties
+replugin-plugin-library/gradle.properties
+replugin-test/gradle.properties
+replugin-test/PluginApp/gradle.properties
+gradle.properties

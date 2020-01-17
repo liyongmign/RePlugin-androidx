@@ -43,33 +43,20 @@ public abstract class PluginAppCompatActivity extends AppCompatActivity {
     }
 
     @Override
-    public Context getBaseContext() {
-
-        return super.getBaseContext();
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //
         RePluginInternal.handleActivityCreateBefore(this, savedInstanceState);
-
         super.onCreate(savedInstanceState);
-
-        //
         RePluginInternal.handleActivityCreate(this, savedInstanceState);
     }
 
     @Override
     protected void onDestroy() {
-        //
         RePluginInternal.handleActivityDestroy(this);
-
         super.onDestroy();
     }
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        //
         RePluginInternal.handleRestoreInstanceState(this, savedInstanceState);
 
         try {
@@ -145,8 +132,4 @@ public abstract class PluginAppCompatActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public String getPackageCodePath() {
-        return super.getPackageCodePath();
-    }
 }

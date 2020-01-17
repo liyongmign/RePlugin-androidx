@@ -27,6 +27,11 @@ android {
         consumerProguardFiles 'replugin-library-rules.pro'
     }
 
+    compileOptions {
+        sourceCompatibility SOURCE_COMPATIBILITY
+        targetCompatibility SOURCE_COMPATIBILITY
+    }
+
     buildTypes {
         release {
             minifyEnabled true

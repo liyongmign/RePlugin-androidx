@@ -10,6 +10,7 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         RePlugin.App.onCreate()
+        RePlugin.enableDebugger(this, BuildConfig.DEBUG)
     }
 
     override fun onLowMemory() {

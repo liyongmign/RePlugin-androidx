@@ -14,6 +14,11 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'groovy'
 
+tasks.withType(GroovyCompile) {
+    sourceCompatibility = SOURCE_COMPATIBILITY
+    targetCompatibility = SOURCE_COMPATIBILITY
+}
+
 dependencies {
     compile gradleApi()
     compile localGroovy()

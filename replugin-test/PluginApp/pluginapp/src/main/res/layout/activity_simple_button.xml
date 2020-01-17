@@ -6,8 +6,10 @@
 
     <Button
         android:id="@+id/button"
+        style="@style/testButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="button" />
 
     <FrameLayout
         android:id="@+id/container"
@@ -21,6 +23,7 @@
             android:layout_gravity="center"
             android:background="@drawable/bg_translate_clickable"
             android:gravity="center"
-            android:padding="16dp" />
+            android:padding="16dp"
+            android:textColor="?appThemeColor" />
     </FrameLayout>
 </LinearLayout>

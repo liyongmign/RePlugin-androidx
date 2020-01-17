@@ -1,12 +1,16 @@
 package com.test.replugin
 
+import android.graphics.Color
 import android.os.Bundle
 import android.os.RemoteException
 import android.text.SpannableStringBuilder
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.widget.Button
 import android.widget.ScrollView
 import android.widget.TextView
+import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
 import com.qihoo360.replugin.RePlugin
 import java.io.File
@@ -22,6 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     private val mExecutor = Executors.newCachedThreadPool()
     private lateinit var apkFile: File
+    private lateinit var debugApkFile: File
     private var mPluginPkName: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +49,11 @@ class MainActivity : AppCompatActivity() {
         // init apk file
         val dir = getExternalFilesDir(null)!!
         apkFile = File(dir, APK_SOURCE)
+        addMessage(redMessage("apkFile:"))
+        addMessage("path = ${apkFile.absolutePath} \nexists = ${apkFile.exists()}")
+        debugApkFile = File(dir, DEBUG_APK_SOURCE)
+        addMessage(redMessage("debugApkFile:"))
+        addMessage("path = ${debugApkFile.absolutePath} \nexists = ${debugApkFile.exists()}")
 
         buttonCopyToSdcard.setText(if (apkFile.isFile) R.string.delete_from_sdcard else R.string.copy_to_sdcard)
 
@@ -76,14 +86,23 @@ class MainActivity : AppCompatActivity() {
                 runOnUiThread {
                     buttonCopyToSdcard.setText(R.string.copy_to_sdcard)
                     buttonCopyToSdcard.unlock()
-                    addMessage("Delete ${apkFile.absolutePath}: ${!apkFile.exists()}")
+                    addMessage(greenMessage("Delete ${apkFile.absolutePath}: ${!apkFile.exists()}"))
                 }
             }
             return
         }
 
         // copy
-        mExecutor.execute { copyApkToSdcard() }
+        mExecutor.execute {
+            try {
+                copyApkToSdcard()
+            } catch (e: Exception) {
+                runOnUiThread {
+                    addMessage(redMessage("No such file in assets: ${e.message}"))
+                    buttonCopyToSdcard.unlock()
+                }
+            }
+        }
     }
 
     private fun copyApkToSdcard() {
@@ -100,7 +119,7 @@ class MainActivity : AppCompatActivity() {
                 runOnUiThread {
                     buttonCopyToSdcard.setText(R.string.delete_from_sdcard)
                     buttonCopyToSdcard.unlock()
-                    addMessage("Copy to ${apkFile.absolutePath}: ${apkFile.exists()}")
+                    addMessage(greenMessage("Copy to ${apkFile.absolutePath}: ${apkFile.exists()}"))
                 }
             }
         }
@@ -109,38 +128,44 @@ class MainActivity : AppCompatActivity() {
     private fun onInstallApkClicked() {
         buttonInstallApk.lock()
 
+        val installApk = if (!apkFile.isFile && debugApkFile.isFile) {
+            debugApkFile
+        } else {
+            apkFile
+        }
+
         // not prepared
-        if (!apkFile.isFile) {
+        if (!installApk.isFile) {
             buttonInstallApk.unlock()
-            return addMessage("Please copy apk file to ${apkFile.absolutePath} first!")
+            return addMessage(redMessage("Please copy apk file to ${installApk.absolutePath} first!"))
         }
 
         if (mPluginPkName?.isNotEmpty() == true) {
-            addMessage("Reinstalling... ${apkFile.absolutePath}")
+            addMessage("Reinstalling... ${installApk.absolutePath}")
         } else {
-            addMessage("Installing... ${apkFile.absolutePath}")
+            addMessage("Installing... ${installApk.absolutePath}")
         }
         mExecutor.execute {
             try {
                 //todo
-                val pluginInfo = RePlugin.install(apkFile.absolutePath)
-                val message: String
+                val pluginInfo = RePlugin.install(installApk.absolutePath)
+                val message = SpannableStringBuilder("Installed result: ")
                 val stringId: Int
                 if (pluginInfo != null) {
-                    message = "Success!"
+                    message.append(greenMessage("Success!"))
                     stringId = R.string.uninstall_apk
                     initInstalledPlugin()
                 } else {
-                    message = "Failed!"
+                    message.append(redMessage("Failed!"))
                     stringId = R.string.install_apk
                 }
 
                 runOnUiThread {
                     buttonInstallApk.setText(stringId)
-                    addMessage("Installed result: $message")
+                    addMessage(message)
                 }
             } catch (e: RemoteException) {
-                runOnUiThread { addMessage("Install ${apkFile.absolutePath} failed!") }
+                runOnUiThread { addMessage(redMessage("Install ${installApk.absolutePath} failed!")) }
             } finally {
                 runOnUiThread { buttonInstallApk.unlock() }
             }
@@ -149,22 +174,35 @@ class MainActivity : AppCompatActivity() {
 
     private fun onOpenApkClicked() {
         if (mPluginPkName?.isNotEmpty() != true) {
-            return addMessage("Please install apk first!")
+            return addMessage(redMessage("Please install apk first!"))
         }
 
         addMessage("Open plugin...")
         try {
             //todo
             val intent = RePlugin.createIntent(mPluginPkName, "com.pluginapp.MainActivity")
-            if (intent != null) {
-                RePlugin.startActivity(this, intent)
-                addMessage("Plugin opened.")
+            if (intent != null && RePlugin.startActivity(this, intent)) {
+                addMessage(greenMessage("Plugin opened."))
             } else {
-                addMessage("Cannot create launch intent for package: $mPluginPkName")
+                addMessage(redMessage("Cannot create launch intent for package: $mPluginPkName"))
             }
         } catch (e: RemoteException) {
-            addMessage("Open plugin failed!")
+            addMessage(redMessage("Open plugin failed!"))
         }
+    }
+
+    private fun redMessage(message: String?): CharSequence? {
+        return colorMessage(message, Color.RED)
+    }
+
+    private fun greenMessage(message: String?): CharSequence? {
+        return colorMessage(message, Color.GREEN)
+    }
+
+    private fun colorMessage(message: String?, @ColorInt color: Int): CharSequence? {
+        val text = SpannableStringBuilder(message ?: return null)
+        text.setSpan(ForegroundColorSpan(color), 0, message.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        return text
     }
 
     private val mMessages = SpannableStringBuilder()
@@ -200,6 +238,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val APK_SOURCE = "app-plugin.apk"
+        private const val DEBUG_APK_SOURCE = "pluginapp-debug.apk"
     }
 
 }

@@ -23,6 +23,11 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    compileOptions {
+        sourceCompatibility SOURCE_COMPATIBILITY
+        targetCompatibility SOURCE_COMPATIBILITY
+    }
+
     buildTypes {
         release {
             signingConfig signingConfigs.release
@@ -60,9 +65,12 @@ dependencies {
 apply plugin: 'replugin-plugin-gradle'
 
 repluginPluginConfig {
+    appModule = ':pluginapp'
     pluginName = "pluginapp"
+    phoneStorageDir = "/storage/emulated/0/Android/data/com.test.replugin/files/"
     hostApplicationId = "com.test.replugin"
     hostAppLauncherActivity = "com.test.replugin.MainActivity"
+
 }
 
 dependencies {

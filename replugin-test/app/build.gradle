@@ -22,6 +22,12 @@ android {
         versionName VERSION_NAME
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    compileOptions {
+        sourceCompatibility SOURCE_COMPATIBILITY
+        targetCompatibility SOURCE_COMPATIBILITY
+    }
+
     buildTypes {
         debug {
             signingConfig signingConfigs.release

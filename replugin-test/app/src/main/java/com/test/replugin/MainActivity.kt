@@ -13,16 +13,18 @@ import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
 import com.qihoo360.replugin.RePlugin
+import kotterknife.bindView
 import java.io.File
 import java.io.FileOutputStream
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var buttonCopyToSdcard: Button
-    private lateinit var buttonInstallApk: Button
-    private lateinit var buttonOpenApk: Button
-    private lateinit var tvMessage: TextView
+    private val buttonCopyToSdcard: Button by bindView(R.id.button_copy_to_sdcard)
+    private val buttonInstallApk: Button by bindView(R.id.button_install_apk)
+    private val buttonOpenApk: Button by bindView(R.id.button_open_apk)
+    private val buttonOpenClass: Button by bindView(R.id.button_open_class)
+    private val tvMessage: TextView by bindView(R.id.tv_message)
 
     private val mExecutor = Executors.newCachedThreadPool()
     private lateinit var apkFile: File
@@ -32,14 +34,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        buttonCopyToSdcard = findViewById(R.id.button_copy_to_sdcard)
-        buttonInstallApk = findViewById(R.id.button_install_apk)
-        buttonOpenApk = findViewById(R.id.button_open_apk)
-        tvMessage = findViewById(R.id.tv_message)
 
         buttonCopyToSdcard.setOnClickListener { onCopyToSdcardClicked() }
         buttonInstallApk.setOnClickListener { onInstallApkClicked() }
         buttonOpenApk.setOnClickListener { onOpenApkClicked() }
+        buttonOpenClass.setOnClickListener { onOpenClassClicked() }
 
         tvMessage.setOnLongClickListener {
             clearMessage()
@@ -188,6 +187,20 @@ class MainActivity : AppCompatActivity() {
             }
         } catch (e: RemoteException) {
             addMessage(redMessage("Open plugin failed!"))
+        }
+    }
+
+    private fun onOpenClassClicked() {
+        if (mPluginPkName?.isNotEmpty() != true) {
+            return addMessage(redMessage("Please install apk first!"))
+        }
+
+        addMessage("Open class from plugin...")
+        try {
+            //todo
+        RePlugin.
+        } catch (e: RemoteException) {
+            addMessage(redMessage("Open class from plugin failed!"))
         }
     }
 

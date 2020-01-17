@@ -6,23 +6,36 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/button_copy_to_sdcard"
-        android:layout_width="wrap_content"
+    <GridLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/copy_to_sdcard" />
+        android:columnCount="3"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/button_install_apk"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/install_apk" />
+        <Button
+            android:id="@+id/button_copy_to_sdcard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/copy_to_sdcard" />
 
-    <Button
-        android:id="@+id/button_open_apk"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/open_apk" />
+        <Button
+            android:id="@+id/button_install_apk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/install_apk" />
+
+        <Button
+            android:id="@+id/button_open_apk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/open_apk" />
+
+        <Button
+            android:id="@+id/button_open_class"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/open_class" />
+    </GridLayout>
 
     <ScrollView
         android:layout_width="match_parent"

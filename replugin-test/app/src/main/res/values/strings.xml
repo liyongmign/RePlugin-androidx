@@ -6,4 +6,5 @@
     <string name="install_apk">install_apk</string>
     <string name="uninstall_apk">reinstall_apk</string>
     <string name="open_apk">open_apk</string>
+    <string name="open_class">open_class</string>
 </resources>

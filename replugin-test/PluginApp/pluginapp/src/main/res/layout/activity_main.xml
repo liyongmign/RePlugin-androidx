@@ -66,5 +66,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/activity_so_files" />
+        <Button
+            android:id="@+id/activity_arouter"
+            style="@style/testButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_arouter" />
     </LinearLayout>
 </ScrollView>

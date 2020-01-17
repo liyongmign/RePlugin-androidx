@@ -1,13 +1,33 @@
-**Activity** -> support. **Tips:** The activity animation is invalid.</br>
-**Service** -> support. </br>
-**BroadcastReceiver** -> support. </br>
-**ContentProvider** -> no test. </br>
+1、##### Activity
+support.
+**Tips:** The activity animation is invalid.</br>
 
-**Fragment** -> support. </br>
-**Request permissions** -> support. **Tips:** All permissions that request need register host app's AndroidManifest.xml </br>
-**ExecutorService**-> support. </br>
-**Notification**-> support. **Tips:** Don't support custom layout and PendingIntent.</br>
-**'so' files**-> support. </br>
-****->  </br>
+2、##### Service
+support.
+
+3、##### BroadcastReceiver
+support.
+
+4、##### ContentProvider
+no test.
+
+5、##### Fragment
+support.
+
+6、##### Request permissions
+support.
+**Tips:** All permissions that request need register host app's AndroidManifest.xml
+
+7、##### ExecutorService
+**-> support.
+
+8、##### Notification
+**-> support.
+**Tips:** Don't support custom layout and PendingIntent.</br>
+
+9、##### 'so' files
+support.
+
+****-> 
 
 **Other content not tested.**

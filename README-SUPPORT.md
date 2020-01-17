@@ -1,4 +1,4 @@
-**Activity** -> support. </br>
+**Activity** -> support. **Tips:** The activity animation is invalid.</br>
 **Service** -> support. </br>
 **BroadcastReceiver** -> support. </br>
 **ContentProvider** -> no test. </br>
@@ -9,3 +9,5 @@
 **Notification**-> support. **Tips:** Don't support custom layout and PendingIntent.</br>
 **'so' files**-> support. </br>
 ****->  </br>
+
+**Other content not tested.**

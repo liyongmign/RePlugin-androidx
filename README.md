@@ -1,8 +1,8 @@
 Source from: [360-RePlugin](https://github.com/Qihoo360/RePlugin)
 
 ### 修改内容
-1、经过修改为使用 androidx.appcompat:appcompat 包，不支持 com.android.support:appcompat-v7 </br>
-2、项目根目录的 build.gradle 文件 使用版本 gradle:3.5.2，其他版本未测试过 </br>
+1、经过修改为使用 **androidx.appcompat:appcompat** 包，不支持 **com.android.support:appcompat-v7** </br>
+2、项目根目录的 **build.gradle** 文件 使用版本 **gradle:3.5.2**，其他版本未测试过 </br>
 ```Gradle
 buildscript {
     ……

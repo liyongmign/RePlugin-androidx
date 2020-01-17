@@ -3,6 +3,7 @@ package com.test.replugin
 import android.app.Application
 import android.content.Context
 import android.content.res.Configuration
+import com.alibaba.android.arouter.launcher.ARouter
 import com.qihoo360.replugin.RePlugin
 import com.qihoo360.replugin.RePluginConfig
 
@@ -11,6 +12,13 @@ class App : Application() {
         super.onCreate()
         RePlugin.App.onCreate()
         RePlugin.enableDebugger(this, BuildConfig.DEBUG)
+
+        //ARouter
+        if (BuildConfig.DEBUG) {
+            ARouter.openDebug()
+            ARouter.openLog()
+        }
+        ARouter.init(this)
     }
 
     override fun onLowMemory() {

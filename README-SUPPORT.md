@@ -28,6 +28,7 @@ support.
 ##### 9、'so' files
 support.
 
-****-> 
+##### 9、ARouter
+not support.
 
 **Other content not tested.**

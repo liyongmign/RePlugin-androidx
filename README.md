@@ -19,7 +19,7 @@ buildscript {
 android {
     // ATTENTION!!! Must CONFIG this to accord with Gradle's standard, and avoid some error
     defaultConfig {
-        applicationId "com.qihoo360.replugin.sample.host"
+        applicationId "com.test.replugin"
         ...
     }
     ...
@@ -93,5 +93,44 @@ class App : Application() {
         super.onConfigurationChanged(newConfig)
         RePlugin.App.onConfigurationChanged(newConfig)
     }
+}
+```
+
+
+### 插件接入指南
+见[360-RePlugin插件接入指南](https://github.com/Qihoo360/RePlugin/wiki/插件接入指南)
+
+#### 第 1 步：添加 RePlugin Plugin Gradle 依赖
+在项目根目录的 build.gradle（注意：不是 app/build.gradle） 中添加 replugin-plugin-gradle 依赖：
+```Gradle
+buildscript {
+    dependencies {
+        classpath 'androidx.qihoo360.replugin:replugin-plugin-gradle:2.2.4'
+        ...
+    }
+}
+```
+
+#### 第 2 步：添加 RePlugin Plugin Library 依赖
+在 app/build.gradle 中应用 replugin-plugin-gradle 插件，并添加 replugin-plugin-lib 依赖:
+```Gradle
+// 这个plugin需要放在android配置之后，因为需要读取android中的配置项
+apply plugin: 'replugin-plugin-gradle'
+
+repluginPluginConfig {
+    appModule = ':pluginapp'
+    //插件名
+    pluginName = "pluginapp"
+    //编译的插件包推送到手机的目录
+    phoneStorageDir = "/storage/emulated/0/Android/data/com.test.replugin/files/"
+    //宿主app的包名
+    hostApplicationId = "com.test.replugin"
+    //宿主app的启动activity
+    hostAppLauncherActivity = "com.test.replugin.MainActivity"
+}
+
+dependencies {
+    implementation 'androidx.qihoo360.replugin:replugin-plugin-lib:2.3.3'
+    ……
 }
 ```

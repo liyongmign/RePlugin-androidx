@@ -1,10 +1,10 @@
-** Activity ** -> support </br>
-** Service ** -> support </br>
-** BroadcastReceiver ** -> support </br>
-** ContentProvider ** -> no test </br>
+**Activity** -> support </br>
+**Service** -> support </br>
+**BroadcastReceiver** -> support </br>
+**ContentProvider** -> no test </br>
 
-** Fragment** -> support </br>
-**  ** ->  </br>
-**  **->  </br>
+**Fragment** -> support </br>
+**** ->  </br>
+****->  </br>
 
-**  ** ->  </br>
+**** ->  </br>

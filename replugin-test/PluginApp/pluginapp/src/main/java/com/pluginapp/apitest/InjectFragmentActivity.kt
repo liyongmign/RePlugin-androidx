@@ -56,7 +56,10 @@ internal class InjectFragment : BaseFragment() {
 
     override fun onClicked(view: View?) {
         requestPermissions(
-            arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE),
+            arrayOf(
+                Manifest.permission.CAMERA,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ),
             REQUEST_PERMISSIONS_TEST
         )
     }

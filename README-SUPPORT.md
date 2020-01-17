@@ -4,7 +4,7 @@
 **ContentProvider** -> no test </br>
 
 **Fragment** -> support </br>
-**** ->  </br>
+**Request permissions** -> All permissions that request need register host app's AndroidManifest.xml </br>
 ****->  </br>
 
-**** ->  </br>
+****->  </br>

@@ -2,6 +2,7 @@ Source from: [360-RePlugin](https://github.com/Qihoo360/RePlugin)
 
 ### 修改内容
 1、经过修改为使用 androidx.appcompat:appcompat 包，不支持 com.android.support:appcompat-v7
+
 2、项目根目录的 build.gradle 文件 使用版本 gradle:3.5.2，其他版本未测试过
 ```Gradle
 buildscript {
@@ -12,8 +13,8 @@ buildscript {
     }
 }
 ```
-3、支持的内容
-[]()
+
+3、[支持的内容](https://github.com/liyongmign/RePlugin-dev/blob/master/README-SUPPORT.md)
 
 ### 主程序接入指南
 见[360-RePlugin主程序接入指南](https://github.com/Qihoo360/RePlugin/wiki/主程序接入指南)

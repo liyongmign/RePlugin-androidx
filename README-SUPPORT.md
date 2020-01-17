@@ -12,8 +12,8 @@ buildscript {
     }
 }
 ```
-
-### 支持的内容
+3、支持的内容
+[]()
 
 ### 主程序接入指南
 见[360-RePlugin主程序接入指南](https://github.com/Qihoo360/RePlugin/wiki/主程序接入指南)

@@ -12,7 +12,7 @@ buildscript {
     }
 }
 ```
-3、[支持的内容](https://github.com/liyongmign/RePlugin-dev/blob/master/README-SUPPORT.md) </br>
+3、[Plugin支持的内容](https://github.com/liyongmign/RePlugin-dev/blob/master/README-SUPPORT.md) </br>
 
 ### 主程序接入指南
 见[360-RePlugin主程序接入指南](https://github.com/Qihoo360/RePlugin/wiki/主程序接入指南)

@@ -8,5 +8,5 @@
     <string name="activity_broadcast">Test BroadcastReceiver</string>
     <string name="activity_notification">Test Notification</string>
     <string name="activity_so_files">Test so files</string>
-    <string name="activity_arouter">Test ARouterActivity</string>
+    <string name="activity_arouter">Test ARouter Activity</string>
 </resources>

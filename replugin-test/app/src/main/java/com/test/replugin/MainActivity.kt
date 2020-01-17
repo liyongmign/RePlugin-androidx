@@ -198,7 +198,7 @@ class MainActivity : AppCompatActivity() {
         addMessage("Open class from plugin...")
         try {
             //todo
-        RePlugin.
+            addMessage("Currently not supported.")
         } catch (e: RemoteException) {
             addMessage(redMessage("Open class from plugin failed!"))
         }

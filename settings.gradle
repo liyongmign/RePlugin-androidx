@@ -1,2 +1,7 @@
 include ':replugin-host-gradle'
 include ':replugin-plugin-gradle'
+
+include ':replugin-host-lib'
+project(':replugin-host-lib').projectDir = file('replugin-host-library/replugin-host-lib')
+include ':replugin-plugin-lib'
+project(':replugin-plugin-lib').projectDir = file('replugin-plugin-library/replugin-plugin-lib')

@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity() {
 
     private val mExecutor = Executors.newCachedThreadPool()
     private lateinit var apkFile: File
-    private lateinit var debugApkFile: File
     private var mPluginPkName: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,9 +49,6 @@ class MainActivity : AppCompatActivity() {
         apkFile = File(dir, APK_SOURCE)
         addMessage(redMessage("apkFile:"))
         addMessage("path = ${apkFile.absolutePath} \nexists = ${apkFile.exists()}")
-        debugApkFile = File(dir, DEBUG_APK_SOURCE)
-        addMessage(redMessage("debugApkFile:"))
-        addMessage("path = ${debugApkFile.absolutePath} \nexists = ${debugApkFile.exists()}")
 
         buttonCopyToSdcard.setText(if (apkFile.isFile) R.string.delete_from_sdcard else R.string.copy_to_sdcard)
 
@@ -127,11 +123,7 @@ class MainActivity : AppCompatActivity() {
     private fun onInstallApkClicked() {
         buttonInstallApk.lock()
 
-        val installApk = if (!apkFile.isFile && debugApkFile.isFile) {
-            debugApkFile
-        } else {
-            apkFile
-        }
+        val installApk = apkFile
 
         // not prepared
         if (!installApk.isFile) {
@@ -179,7 +171,7 @@ class MainActivity : AppCompatActivity() {
         addMessage("Open plugin...")
         try {
             //todo
-            val intent = RePlugin.createIntent(mPluginPkName, "com.pluginapp.MainActivity")
+            val intent = RePlugin.createIntent(mPluginPkName, APK_LAUNCH_CLASS)
             if (intent != null && RePlugin.startActivity(this, intent)) {
                 addMessage(greenMessage("Plugin opened."))
             } else {
@@ -250,8 +242,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val APK_SOURCE = "app-plugin.apk"
-        private const val DEBUG_APK_SOURCE = "pluginapp-debug.apk"
+        private const val APK_SOURCE = "cyzg-3.8-beta1.apk" // "app-plugin.apk"
+        private const val APK_LAUNCH_CLASS = "com.cxkj.cyzg.home.WelcomeActivity" // "com.pluginapp.MainActivity"
     }
 
 }

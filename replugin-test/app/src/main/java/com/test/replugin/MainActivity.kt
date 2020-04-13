@@ -242,8 +242,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val APK_SOURCE = "cyzg-3.8-beta1.apk" // "app-plugin.apk"
-        private const val APK_LAUNCH_CLASS = "com.cxkj.cyzg.home.WelcomeActivity" // "com.pluginapp.MainActivity"
+        private const val APK_SOURCE = "cyzg.apk" // "app-plugin.apk"
+        private const val APK_LAUNCH_CLASS = "com.gxcxjt.congyezige.LaunchActivity" // "com.pluginapp.MainActivity"
     }
 
 }
